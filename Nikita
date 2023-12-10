@@ -1,0 +1,993 @@
+#x=int(input("введити число"))
+#print("следуешее за числом ",x,"число-" ,x+1)
+#print("для числа ",x,"предыдушие число-" ,x-1)
+
+
+#s=int(input("введити растояние которое проехал автомобиль км"))
+#V1=int(input("введити скорость 1 авто км/ч"))
+#V2=int(input("введити скорость 2 авто км/ч"))
+#print("выводит скорость в часах",(s/(V1+V2))) #эта строка выводит скорость в часах
+#print("выводит скорость в минутах",(s/(V1+V2)*60)) #эта строка выводит скорость в минутах
+
+
+# x=int(input("введите свой возраст"))
+# if x<20:
+#     print("Take Youre Kindle")
+# elif 0<x<=6:
+#     print("возьмите пустышку или молоко")
+# elif 7<x<=9:
+#     print("возьмите планшет или печенько")
+# elif 10<x<=14:
+#     print("возьмите музыкальный плеер и шоколадку")
+# elif 15<x<=18:
+#     print("возьмите телефон и посмотрите Yotube")
+# elif 19<x<=50:
+#     print("Если хотите возьмите чашку виски")
+# elif 51<x<=90:
+#     print("возьмите плетик и наушники")
+# elif 91<x<=1000:
+#     print("не врите вам не столько")
+
+
+
+# counter=1
+# remainder=0
+# while counter<=20: #если цикл меньше 20
+#     remaider=int(counter%3) #считает 3 процента
+#     if remaider==0: #если ремайдер = 0
+#         print(counter) #написать число которое ровно 3 процентов
+#     counter=counter+1 #сделать +1
+
+
+# cakes=int(input("сколько тортов вы хотите испеч")) #для ввода даных (цифровых)
+# egs=0 #это переменная
+# summa=0 # это тоже перемменая
+# while egs<=cakes: #цикл для подсчета яич
+#     summa=summa+egs #перезаписываем переменную сумы в ее же значение + количества яиц
+# print(summa,"яиц") # написать сумму в консоль
+
+#from random import randint #импортирует библеотека
+#counter=1 #переменная которая будет использоватся ниже
+#randint(700,1500) #генерирует рандомные числа
+#while  counter<=10: #цикл с помощью которого 10 раз повторяются действия
+    #x=randint(700,1500) # переменая x ровно числу которое сгинрировал рандом
+    #if x>1000: #если сгенерированое чесло меньше 1000
+        #print(x,"это все стоимость товара больше 1000 грн")  #пишет в консоль
+    #counter=counter+1
+
+
+# x=int(input("введите число"))
+# while (x!=0):
+#     lastnumber=int(x%10)
+#     x=int(x/10)
+
+
+# bacterii=int(input("введите количество бактерий")) #для ввода данных
+# counter=1 #переменая для подсчета
+# while counter<=24: #спомощью цикла подсчет повторяяется 24 раза
+#     bacterii=bacterii*2 #для подсчета бактерий
+#     print(bacterii) #для вывода количества баоктерий в консоль
+#     counter=counter+1 #заканчивает цикл
+
+
+
+
+
+# firstrow=int(input("введите число"))
+# hz=int(input("введите число"))
+# counter=1
+# while hz<=firstrow:
+#     print(firstrow, firstrow+1, firstrow+2, firstrow+3, firstrow+4, firstrow+5, firstrow+6, firstrow+7,firstrow+8, firstrow+9,)
+#     counter=counter+1
+#     firstrow=firstrow-hz
+
+
+
+
+# counter=1
+# step=0
+# n = int(input("введите число"))
+# while counter<=n:
+#     print(n**counter)
+#     counter=counter+1
+
+
+
+
+
+# first=21 #переменая которую мы будем использовать в принте
+# hz=0 #для цикла
+# while hz<=0: #повторяет 0 раз следуешии строки
+#     print(hz,"\n",first,"\n",first+1,first+1,"\n",first+2,first+2,first+2,"\n",first+3, first+3, first+3, first+3 ,"\n",first+4, first+4, first+4, first+4, first+4) #для вывода
+#     hz=hz+1 #заканчивает цикл
+
+
+
+
+
+
+# first=21 #переменая которую мы будем использовать в принте
+# hz=0 #для цикла
+# while hz<=0: #повторяет 0 раз следуешии строки
+#     while hz<=5
+#         print(hz,"\n",first,first+1,first+2,first+3,first+4,"\n",first,first+1,first+2,first+3,"\n",first,first+1,first+2,"\n",first,first+1,"\n",first)
+#     hz=hz+1 #заканчивает цикл
+
+
+
+
+
+# counter=1
+# step=21
+# n=5
+# while counter<=n:
+#     print(n++counter)
+#     counter=counter+1
+
+
+
+
+# a=0
+# a=int(input("введите число"))
+# summa=0
+# while a<=500:
+#     summa=summa+a
+#     print(summa)
+#     a=a+1
+
+
+
+
+
+
+
+# seconds = int(input("введите секунды"))
+# day=seconds/86400
+# houvers=seconds/3600
+# minutes=seconds/60
+# ostatokotseconds=seconds
+# ostatokotday=day%86400
+# ostatokothouvers=houvers%3600
+# ostatokotminutes=minutes%60
+# print(ostatokotminutes,ostatokothouvers,ostatokotday,se
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# n = int(input("введите число"))
+# vusokostniy=n%4
+# if vusokostniy==0:
+#     print("высокостный")
+# else:
+#     print("не высокостный")
+#
+#
+# n2= int(input("введите число"))
+# vusokostniy2=n2%400
+# if vusokostniy==0:
+#     print("высокостный")
+
+
+
+
+
+
+# thetniy=int(input("введите число"))
+# nethetniy=thetniy%2
+# if nethetniy==0:
+#     print("четное")
+# else:
+#      print("не четный")
+
+
+# twothetniy=int(input("введите число чтобы проверить его на четность"))
+# chislonakotoroedeletsiasostatkom=int(input("введите число на которое будет деление с остатком"))
+# twonethetniy=twothetniy%chislonakotoroedeletsiasostatkom
+# if twonethetniy==0:
+#     print("четное")
+# else:
+#     print("нечетное")
+
+
+# thetniy=int(input("введите число"))
+# if thetniy==1:
+#     print("1,2,3,4,5,6,7,8,9,10")
+#     if 20 == 20:
+#         print("2,4,6,8,10")
+#     if thetniy == 3:
+#         print("3,6,9")
+#     if thetniy == 4:
+#         print("4,8")
+#     if thetniy == 5:
+#         print("5,10")
+#     if thetniy == 6:
+#         print("6")
+#     if thetniy == 7:
+#         print("7")
+#     if thetniy == 8:
+#         print("8")
+#     if thetniy == 9:
+#      print("9")
+#     if thetniy == 10:
+#      print("10")
+
+
+# thehthislo = int(input("введите трехзначное число число"))
+# edynyci=thehthislo%10
+# desiatyki = int((thehthislo%100-edynyci)/10)
+# sotniy = int (((thehthislo%1000-edynyci-desiatyki)/100))
+# summa=edynyci+desiatyki+sotniy
+# proizvedenii=edynyci*desiatyki*sotniy
+# print("еденицы-",edynyci,"\n","десятки-",desiatyki,"\n","сотни-",sotniy,"\n","сумма-",summa,"\n","произведение-",proizvedenii)
+
+
+# counter=0
+# step=0
+# n = int(input("введите число"))
+# while counter<=n:
+#     print(counter+4)
+#     counter=counter+4
+
+
+# summa=0
+# Multiply=1
+# thetniy=int(input("введите сколько раз вы будете вводить цисла")) #ввод сколько раз вы будет писать цисел
+# for i in range (thetniy) : # цикл который будет повторятся столько сколько мы будем вводить цисел
+#     hz=int(input("введите число")) #ввод чисел
+#     nethetniy=hz%2 #проверка на четность
+#     if nethetniy==0:# если четнасть соблюдается выполнять ниже скажаные действия
+#
+#         Multiply=Multiply*hz
+#     print(Multiply)#вывод добутка
+#     nethetnii=hz%2#проверка на четность
+#     if nethetnii!=0:#если четность не соблюдается выполнять ниже скажаные действия
+#         summa=summa+hz
+#     print(summa)
+# #
+
+
+
+
+
+
+
+# roj=int(input("введите число"))
+# # print1=20
+# if roj==20:
+#     print("ваше число 20")
+# elif roj == 4:
+#     print("ваше число 4")
+# elif roj == 0:
+#     print("ваше число 0")
+# else:
+#     print("ваше число не куда не подходит")
+
+
+
+# j=4
+# counter=2023
+# while counter==2023:
+#     print(4+4)
+# j=j+4
+
+
+
+# counter=0
+# step=0
+# n=80
+# while counter<=n:
+#     print(counter+3)
+# while counter <= n:
+#     print(counter+5)
+#     counter=counter+3
+# counter=counter+5
+
+
+
+
+# roj=int(input("введите до которого будет идти проверка"))
+# g=int(input("введите число"))
+# j=int(input("введите число"))
+# i=0
+# while i<=roj:
+#     if i%g==0 and i%j==0:
+#         print(i)
+#     i+=1
+
+
+
+
+
+
+
+
+
+# i=1
+# while i<=5000:
+#     if i%139==0:
+#         print(i)
+#     i+=1
+
+
+#
+#
+#
+#
+#
+#
+#
+#
+#
+# name =input("какое твое имя")
+# age =input("сколько тебе лет")
+# print("Меня зовут", name, "мне", age, 10)
+#
+#
+#
+#
+#
+#
+#
+# code
+# # Ввод чисел с клавиатуры и преобразование в целые числа
+# num1 = int(input("Введите первое число: "))
+# num2 = int(input("Введите второе число: "))
+#
+# # Сравнение чисел и вывод результата
+# if num1 > num2:
+#     print("Да")
+# elif num1 == num2:
+#     print("равны")
+# else:
+#     print("Нет")
+#
+#
+
+
+
+
+
+
+
+
+
+# n=5000
+#
+# while n>0:
+#     if n%139==0:
+#         print(n)
+#         break
+#     n-=1
+#
+
+
+
+
+
+# numbers = input("Введите последовательность целых чисел ")
+#
+# # Разбиваем строку на числа и преобразуем каждое в целое число
+# numbers = list(map(int, numbers.split()))
+# # Создаем список для парных чисел
+# even_numbers = []
+#
+# # Проходим по каждому числу в последовательности
+# for num in numbers:
+#     # Если число четное, добавляем его в список парных чисел
+#     if num % 2 == 0:
+#         even_numbers.append(num)
+#
+# # Выводим список парных чисел
+# print("Парные числа в последовательности:", even_numbers)
+
+
+
+
+# t=0
+# t=input("Введите последовательность целых чисел ")
+
+
+
+
+
+
+
+# udi=int(input("Введите последовательность целых чисел"))
+# i=int(input("Введите числа которые"))
+# while i<=udi:
+#     if i%2==0:
+#         print(i)
+#     i+=1
+
+
+
+
+
+# numbers = input("Введите последовательность целых чисел через пробел: ")
+#
+# # Разбиваем строку на числа и преобразуем каждое в целое число
+# numbers = list(map(int, numbers.split()))
+#
+# # Создаем список для парных чисел
+# even_numbers = []
+#
+# # Проходим по каждому числу в последовательности
+# for num in numbers:
+#     # Если число четное, добавляем его в список парных чисел
+#     if num % 2 == 0:
+#         even_numbers.append(num)
+#
+# # Выводим список парных чисел
+# print("Парные числа в последовательности:", even_numbers)
+
+
+
+
+
+
+
+
+# counter=0
+# step=0
+# n = int(input("введите число"))
+# while counter<=n:
+#     print(counter+2)
+#     counter=counter+2
+
+
+
+
+# width = int(input("Введите ширину пирамиды: "))
+# height = int(input("Введите высоту пирамиды: "))
+#
+# for i in range(height):
+#     for j in range(width):
+#         if j <= i:
+#             print(start, end=" ")
+#             start += 1
+#         else:
+#             print(" ", end=" ")
+#     print()
+#
+#
+
+
+
+# width = int(input("Введите ширину пирамиды: "))
+# height = int(input("Введите высоту пирамиды: "))
+# start = int(input("Введите стартовое число: "))
+#
+# for i in range(height):
+#     for j in range(width):
+#         if j <= i:
+#             print(start, end=" ")
+#             start += 1
+#         else:
+#             print(" ", end=" ")
+#     print()
+
+
+
+
+
+
+
+
+
+
+# height = int(input("Введите высоту треугольника: "))
+#
+# # Рисуем треугольник с помощью циклов
+# for i in range(height):
+#     for j in range(height - i - 1):
+#         print(" ", end="")
+#     for j in range(2 * i + 1):
+#         print("^", end="")
+#     print()
+
+
+
+
+
+# height = int(input("Введите высоту треугольника: "))
+# i=0
+# while i<height:
+#     h=0
+#     while h < height -i-1:
+#         print(" ", end="")
+#         h+=1
+#         h=0
+#         while h<2*i+1:
+#             print(21+1, end="")
+#             h+=1
+#         print()
+#         i+=1
+
+
+# height = int(input("Введите высоту треугольника: "))
+#
+# i = height-1
+# while i >= 0:
+#     j = 0
+#     while j < height - i - 1:
+#         print(20+1, end="")
+#         j += 1
+#     j = 0
+#     while j < 2*i+1:
+#         print(20, end="")
+#         j += 1
+#     print()
+#     i -= 1
+
+
+
+
+
+
+
+
+
+# width = int(input("Введите ширину полутреугольника: "))
+# height = int(input("Введите высоту полутреугольника: "))
+# start = int(input("Введите стартовое число: "))
+#
+#
+#
+#
+# for j in range(height):
+#     for i in range(width):
+#         if j >= i:
+#             print(start, end=" ")
+#             start += 1
+#         else:
+#             print(" ", end=" ")
+#     print()
+
+
+# width = int(input("Введите ширину полутреугольника: "))
+# height = int(input("Введите высоту полутреугольника: "))
+# start = int(input("Введите стартовое число: "))
+#
+# for i in range(height):
+#     for j in range(width-1, -1, -1):
+#         if j >= i:
+#             print(start, end=" ")
+#             start += 1
+#         else:
+#             print(" ", end=" ")
+#     print()
+# height = int(input("Введите высоту треугольника: "))
+#
+# i = height-1
+# while i >= 0:
+#     j = 0
+#     while j < height - i - 1:
+#         print(20+1, end="")
+#         j += 1
+#     j = 0
+#     while j < 2*i+1:
+#         print(20, end="")
+#         j += 1
+#     print()
+#     i -= 1
+
+
+
+# summa=0
+# thetniy=int(input("введите сколько раз вы будете вводить цисла")) #ввод сколько раз вы будет писать цисел
+# for i in range (thetniy) : # цикл который будет повторятся столько сколько мы будем вводить цисел
+#     hz=int(input("введите зарплату")) #ввод чисел
+#
+#     if hz <= 0:
+#         rashoiny=summa+hz
+#         if hz>=0:
+#             summa = summa + hz
+#             print(summa,"грн")
+#             print(summa/36.85,"доллоров")
+# print(rashoiny)
+
+
+
+
+
+# a=int(input("введите число на на которое будет идти проверка"))
+# b=int(input("введите число на на которое будет идти проверка"))
+# c=int(input("введите число на на которое будет идти проверка"))
+# if c%b==0:
+#     print(c, "делится на",b)
+# else:
+#     print(c, "не делется на",b)
+# if c % a == 0:
+#         print(c, "делится на",a)
+# else:
+#     print(c, "не делется на", a)
+# if a % c == 0:
+#         print(a, "делится на",c)
+# else:
+#     print(a, "не делется на", c)
+# if b % c == 0:
+#         print(b, "делится на",c)
+# else:
+#     print(b, "не делется на", c)
+
+
+
+
+
+# er=int(input("введите какой вариант вам надо"))
+# if er==1:
+#     vanavto=int(input("введите скорость 1 автомобиля"))
+#     twoavto=int(input("введите скорость 2 автомобиля"))
+#     distance=int(input("введите растояние между автомобилями"))
+#     if vanavto<=-1:
+#         print("ОТРИЦАТЕЛЬНОЙ СКОРОСТИ НЕ СУЩЕСТВУЕТ")
+#     else:
+#         hz = vanavto + twoavto
+#         hi = distance / hz
+#         print("через", hi, "часов машины встретятся")
+#     if twoavto <= -1:
+#         print("ОТРИЦАТЕЛЬНОЙ СКОРОСТИ НЕ СУЩЕСТВУЕТ")
+#     else:
+#         hz=vanavto+twoavto
+#         hi=distance/hz
+#         print("через",hi,"часов машины встретятся")
+# else:
+#     panavto=int(input("введите скорость 1 автомобиля"))
+#     pwoavto=int(input("введите скорость 2 автомобиля"))
+#     if panavto<=-1:
+#         print("ОТРИЦАТЕЛЬНОЙ СКОРОСТИ НЕ СУЩЕСТВУЕТ")
+#     else:
+#         pz = panavto + pwoavto
+#         pi = 40075 / pz
+#         print("через", pi, "часов машины встретятся")
+#         if pwoavto <= -1:
+#             print("ОТРИЦАТЕЛЬНОЙ СКОРОСТИ НЕ СУЩЕСТВУЕТ")
+#         else:
+#             pz=panavto+pwoavto
+#             pi=40075/pz
+#             print("через",pi,"часов машины встретятся")
+
+
+
+
+# m=int(input("f"))
+# hz=int(input("f"))
+# for i in range(hz):
+#     print("*", end=" ")
+#     for i in range(m):
+#         print("*", end=" ")
+
+
+
+
+
+
+# width = int(input("Введите ширину полутриугольника : "))
+# height = int(input("Введите высоту : "))
+# hz = int(input("Введите число : "))
+# for i in range(height):
+#     for j in range(width):
+#         if j <= i:
+#
+#             print(hz+j, end=" ")
+#         else:
+#             print("", end=" ")
+#     print()
+
+
+
+
+# r = float(input("Введите h цилиндр : "))
+# h = float(input("Введите r цилиндра : "))
+# hz=3,1415*r*h*2
+# print("обём цилиндра состовляет:",hz)
+
+
+# hz1 = int(input("Введите цисло : "))
+# hz2 = int(input("Введите 2 цисло : "))
+# if hz1<hz2:
+#     print("<")
+# else:
+#     print(">")
+
+
+
+# r = float(input("Введите цисло : "))
+# h = float(input("Введите процент от цисла : "))
+# hz=r/100*h
+# print("процент от цисла состовляет:",hz)
+
+
+
+
+# def power(a, n): #
+#     if n == 0: #условие
+#         return 1 #повторять действия 1 раз
+#     else: #если не выполняется условие тогда :
+#         return a * power(a, n - 1) #цикл
+#    #пробел
+# a = float(input()) #переменые
+# n = int(input()) #переменые
+# print(power(a, n)) #вывод
+
+
+
+
+
+
+# height = int(input("Введите высоту треугольника: "))
+#
+# # Рисуем треугольник с помощью циклов
+# for i in range(height):
+#     for j in range(height - i-1): #
+#         print(" ", end="")
+#     for j in range(2 * i + 1):
+#         print("*", end="")
+#     print()
+
+
+# a=int(input("привет, напиши мне 1 любые число"))
+# b=int(input("привет, напиши мне 2 любые число"))
+# c=a+b
+# if a<b:
+#     d=b-a
+#     if a>b:
+#         e=a-b
+#         if a < b:
+#             l = b / a
+#             if a > b:
+#                 f= a/b
+#                 if a < b:
+#                     print(d, c,f)
+#                     if a > b:
+#                         print(e, c,l)
+
+
+
+
+# one=int(input("Добрий день everebady. Введіть будь ласка 1 сторону прямокутника"))
+# two=int(input("Введіть будь ласка 2 сторону прямокутника"))
+# perimetr=(one+two)*2
+# sqare=one*two
+# print("периметр прямокутника дорівнює ",perimetr,"площа прямомокутника дорівнює ", sqare, "см квадратних")
+
+
+# one=int(input("Добрий день everebady. Введіть будь ласка площу основи паралепіпіпида"))
+# two=int(input("Введіть будь ласка висоту паралепіпіпида"))
+# hz=one*two
+# print("обєм паралелепіпида дорівнює", hz)
+
+
+
+# a=int(input("введите число")) #пременная
+#
+# def check_order(num):   # Преобразование числа в строку
+#     num_str = str(num)  # Переменная-флаг для хранения результата
+#
+#     ordered = True  # Проверка последовательности цифр
+#
+#     for i in range(len(num_str) - 1):   # Если текущая цифра больше следующей,
+#
+#         if num_str[i] > num_str[i + 1]: # устанавливаем флаг в False и выходим из цикла
+#             ordered = False
+#             break
+#
+#     # Установка значения результата
+#     if ordered:
+#         result = "Положительный ответ"
+#     else:
+#         result = "Отрицательный ответ"
+#
+#     print(result)   # Вывод результата
+#
+# check_order(a)  # Примеры использования
+
+
+
+
+
+# import random
+#
+# random_number = random.randrange(0, 10)
+# b=int(input("Хай. Угадай число от 1 до 10"))
+# if random_number==b:
+#     print("вы угадали")
+# if random_number<b:
+#     print("ваше число больше")
+# if random_number > b:
+#     print("ваше число меньше")
+
+
+
+
+
+# chet=int(input("введите число для проверки"))
+# if chet%2:
+#     print("ваше число не четное")
+# else:
+#     print("ваще число четное")
+#
+# a=int(input("введите число от которого начинается диапозон"))
+# b=int(input("введите число с того заканчивается диапозон"))
+# sushu = []
+# for i in range(a, b):
+#     for j in range(2, i):
+#         if i % j == 0:
+#             break
+#     else:
+#         sushu.append(i)
+# print(sushu)
+
+
+
+
+
+# import random
+# imia=input("введіть імя собаки")
+# age=input("введіть рік собаки")
+# members = ["ваша собака хоче какати", "ваша собака захворіла", "ваша собака хоче їсти", "ваша собака жре диван", "ваша собака хоче пити", "вам требо привити собаку"]
+# print(random.choice(members))
+# a=random.choice
+# if members [members]==a
+# import random
+# members = ["ваша собака хоче какати", "ваша собака захворіла", "ваша собака хоче їсти"]
+# print(random.choice(members))
+# a=random.choice
+# print(members)
+
+
+# import random
+#
+# def stop():
+#     for year in range(1, 14):
+#         age = year
+#         members = ["ваша собака хочет какать", "ваша собака захворіла", "ваша собака хочет їсти"]
+#         random_member = random.choice(members)
+#
+#         if age >= 13:
+#             print("ВАША СОБАКА ЗДОХЛА")
+#             return
+#
+#         print(f"Собаке {age} года:")
+#         if random_member == members[0]:
+#             place = input("Где ваша собака покакает? ")
+#             print(f"Ваша собака покакает в {place}")
+#         elif random_member == members[1]:
+#             action = input("Что делать, если ваша собака заболела? ")
+#             print(f"Вы должны {action} собаку")
+#         else:
+#             food = input("Что вы дадите вашей собаке поесть? ")
+#             print(f"Вашей собаке можно дать {food}")
+#     print("ВАША СОБАКА ЗДОХЛА")
+#
+# stop()
+
+
+# import random
+# import string
+#
+# def generate_password(length):
+#     characters = string.ascii_letters + string.digits + string.punctuation
+#     password = ''.join(random.choice(characters) for _ in range(length))
+#     return password
+#
+# # def save_password(password):
+# #     # Здесь может быть ваш код для сохранения пароля, например, запись в файл или добавление в базу данных
+# #     print("Пароль сохранен!")
+#
+# length = int(input("Введите желаемую длину пароля: "))
+# password = generate_password(length)
+# print("Сгенерированный пароль:", password)
+#
+# # parol=int(input("введите длину пароля"))
+# # slojnost=int(input("введите сложность пароля: Легкий,средний,тяжолый"))
+
+
+# def fibonacci(n):
+#     if n <= 0:
+#         return "Неверное значение. Введите положительное число."
+#
+#     sequence = [0, 1]  # Первые два элемента последовательности Фибоначчи
+#
+#     while len(sequence) < n:
+#         next_number = sequence[-1] + sequence[-2]
+#         sequence.append(next_number)
+#
+#     return sequence[n - 1]
+#
+# # Получаем ввод от пользователя
+# n = int(input("Введите номер элемента последовательности Фибоначчи: "))
+#
+# # Вызываем функцию и выводим результат
+# result = fibonacci(n)
+# print("Элемент с номером", n, "в последовательности Фибоначчи равен", result)
+
+
+
+# hz2=int(input("на сколько 1 сторона треугольна меншьше за другу"))
+# hz=int(input("на сколько 2 сторона меньше чем 3"))
+# hz3=int(input("введите перемитр треугольника"))
+# hz4=2+hz
+# hz5=hz3-hz2
+# hz6=hz5/hz4
+# hz7=hz*hz6
+# hz8=hz2+hz6
+# print(hz7,hz8)
+
+# n=int(input("введите чему равняется n"))
+# one=(3*n+16)-(6-2*n)
+# print("число", one, "кратное 5")
+
+# one=int(input("введите первое число"))
+# two=int(input("введите второе число"))
+# three=int(input( "введите третье число"))
+
+# max = max(one, two, three)
+# min = min(one, two, three)
+# print(max, min)
+
+# if one>two and one>three:
+#   print(one)
+#   if one<two and one<three:
+#     print(one)
+# if two>one and two>three:
+#   print(two)
+#   if two<one and two<three:
+#     print(two)
+# elif three>one and three> two:
+#   print(three)
+#   if three<one and three< two:
+#     print(three)
+
+
+# x = 0
+# max_value = float('-inf')
+# while True:
+#   hz2 = input("Введите значение: ")
+#   if hz2 == "стоп":
+#     break
+#   hz2 = int(hz2)
+#   max_value = max(max_value, hz2)
+# print("Самое большое число:", max_value)
+
+
+
+
+# a = int(input("ведите a: "))
+# b = int(input("ведите b: "))
+# c = int(input("ведите c: "))
+# hz = 0
+# if a > 0:
+#     hz += a
+# if b > 0:
+#     hz += b
+# if c > 0:
+#     hz += c
+# print(hz)
+
+# max=-999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
+# for i in range(5):
+#     one = int(input("введите число"))
+#     if one>=max:
+#         max=one
+#     print(max)
+
+
+def calculate_sum(n):
+    total_sum = 0
+    for i in range(1, n + 1):
+        total_sum += 1 / i
+    return total_sum
+n = int(input("введи число n"))
+result = calculate_sum(n)
+print(f"{result}")
