@@ -1,0 +1,90 @@
+import pygame
+import sys
+
+# Определения констант
+BOARD_SIZE = 8
+SQUARE_SIZE = 50
+BOARD_COLOR_1 = (255, 206, 158)
+BOARD_COLOR_2 = (209, 139, 71)
+PIECE_COLOR_1 = (80, 80, 80)  # Цвет шашек первого игрока
+PIECE_COLOR_2 = (240, 240, 240)  # Цвет шашек второго игрока
+HIGHLIGHT_COLOR = (0, 0, 255)  # Цвет подсветки выбранной шашки
+WINDOW_SIZE = (BOARD_SIZE * SQUARE_SIZE, BOARD_SIZE * SQUARE_SIZE)
+
+# Инициализация Pygame
+pygame.init()
+screen = pygame.display.set_mode(WINDOW_SIZE)
+pygame.display.set_caption('Игра в шашки')
+
+# Вспомогательные переменные
+selected_piece = None  # Текущая выбранная шашка
+moving_piece = False  # Перемещается ли в данный момент выбранная шашка
+pieces = []  # Список всех шашек в формате (row, col, color)
+
+# Определение начального расположения шашек
+for row in range(3):
+    for col in range((row + 1) % 2, BOARD_SIZE, 2):
+        pieces.append((row, col, PIECE_COLOR_1))
+for row in range(5, 8):
+    for col in range((row + 1) % 2, BOARD_SIZE, 2):
+        pieces.append((row, col, PIECE_COLOR_2))
+
+def draw_board():
+    screen.fill(BOARD_COLOR_1)
+    for row in range(BOARD_SIZE):
+        for col in range(row % 2, BOARD_SIZE, 2):
+            square = (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
+            pygame.draw.rect(screen, BOARD_COLOR_2, square)
+
+def draw_pieces():
+    for piece in pieces:
+        row, col, color = piece
+        position = (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2)
+        pygame.draw.circle(screen, color, position, SQUARE_SIZE // 2 - 5)
+        if selected_piece and piece == selected_piece:
+            pygame.draw.circle(screen, HIGHLIGHT_COLOR, position, SQUARE_SIZE // 2 - 3, 1)
+
+def select_piece(pos):
+    global selected_piece, moving_piece
+    x, y = pos
+    col, row = x // SQUARE_SIZE, y // SQUARE_SIZE
+    for piece in pieces:
+        if piece[:2] == (row, col):
+            if selected_piece == piece:
+                selected_piece = None
+                moving_piece = False
+            else:
+                selected_piece = piece
+                moving_piece = True
+            return
+    selected_piece = None
+    moving_piece = False
+
+def move_piece(pos):
+    global selected_piece, moving_piece
+    if moving_piece and selected_piece:
+        x, y = pos
+        col, row = x // SQUARE_SIZE, y // SQUARE_SIZE
+        # Проверка, что движение происходит по горизонтали в пределах доски
+        if row == selected_piece[0] and 0 <= col < BOARD_SIZE:
+            pieces.remove(selected_piece)
+            selected_piece = (row, col, selected_piece[2])
+            pieces.append(selected_piece)
+            moving_piece = False  # Завершаем перемещение
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Левая кнопка мыши
+                select_piece(event.pos)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1 and moving_piece:  # Левая кнопка мыши и шашка выбрана для перемещения
+                move_piece(event.pos)
+
+    draw_board()
+    draw_pieces()
+    pygame.display.flip()
+
