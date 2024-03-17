@@ -1,0 +1,134 @@
+import pygame
+import random
+
+# Инициализация Pygame
+pygame.init()
+
+# Определение размеров окна
+width, height = 640, 480
+screen = pygame.display.set_mode((width, height))
+
+# Цвета
+white = (255, 255, 255)
+green = (0, 255, 0)
+red = (255, 0, 0)
+
+# Размеры блока и скорость змейки
+block_size = 20
+snake_speed = 15
+
+# Отрисовка змейки
+def draw_snake(snake_body):
+    for block in snake_body:
+        pygame.draw.rect(screen, green, [block[0], block[1], block_size, block_size])
+
+# Основная функция игры
+def game_loop():
+    game_over = False
+    game_close = False
+
+    # Координаты головы змейки
+    x1 = width / 2
+    y1 = height / 2
+
+    # Изменение координат головы змейки
+    x1_change = 0
+    y1_change = 0
+
+    # Инициализация тела змейки
+    snake_body = []
+    length_of_snake = 1
+
+    # Генерация случайной позиции для фрукта
+    food_x = round(random.randrange(0, width - block_size) / 20.0) * 20.0
+    food_y = round(random.randrange(0, height - block_size) / 20.0) * 20.0
+
+    # Игровой цикл
+    while not game_over:
+
+        while game_close:
+            screen.fill(white)
+            font_style = pygame.font.SysFont(None, 50)
+            message = font_style.render("Game Over! Press Q-Quit or C-Play Again", True, red)
+            screen.blit(message, [width / 6, height / 3])
+            pygame.display.update()
+
+            # Обработка событий при окончании игры
+            for event in pygame.event.get():
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_q:
+                        game_over = True
+                        game_close = False
+                    if event.key == pygame.K_c:
+                        game_loop()
+
+        # Обработка событий во время игры
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                game_over = True
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x1_change = -block_size
+                    y1_change = 0
+                elif event.key == pygame.K_RIGHT:
+                    x1_change = block_size
+                    y1_change = 0
+                elif event.key == pygame.K_UP:
+                    y1_change = -block_size
+                    x1_change = 0
+                elif event.key == pygame.K_DOWN:
+                    y1_change = block_size
+                    x1_change = 0
+
+        # Проверка выхода за границы экрана
+        if x1 >= width or x1 < 0 or y1 >= height or y1 < 0:
+            game_close = True
+
+        # Изменение координат головы змейки
+        x1 += x1_change
+        y1 += y1_change
+
+        # Очистка экрана
+        screen.fill(white)
+
+        # Отрисовка фрукта
+        pygame.draw.rect(screen, red, [food_x, food_y, block_size, block_size])
+
+        # Создание новых блоков для змейки
+        snake_head = []
+        snake_head.append(x1)
+        snake_head.append(y1)
+        snake_body.append(snake_head)
+        if len(snake_body) > length_of_snake:
+            del snake_body[0]
+
+        # Проверка на столкновение с самой собой
+        for block in snake_body[:-1]:
+            if block == snake_head:
+                game_close = True
+
+        # Отрисовка змейки
+        draw_snake(snake_body)
+
+        # Обновление экрана
+        pygame.display.update()
+
+        # Проверка столкновения с фруктом
+        if x1 == food_x and y1 == food_y:
+            food_x = round(random.randrange(0, width - block_size) / 20.0) * 20.0
+            food_y = round(random.randrange(0, height - block_size) / 20.0) * 20.0
+            length_of_snake += 1
+
+        # Ограничение скорости змейки
+        pygame.time.Clock().tick(snake_speed)
+
+    pygame.quit()
+
+# Запуск игры
+game_loop()
+
+
+
+
+
+
