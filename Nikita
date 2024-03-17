@@ -983,11 +983,772 @@
 #     print(max)
 
 
-def calculate_sum(n):
-    total_sum = 0
-    for i in range(1, n + 1):
-        total_sum += 1 / i
-    return total_sum
-n = int(input("введи число n"))
-result = calculate_sum(n)
-print(f"{result}")
+# n = int(input("введите n"))
+# total_sum = 0
+# for i in range(1, n + 1):
+#     total_sum += 1 / i
+# print(total_sum)
+
+
+
+# factorial=int(input("введите факториал "))
+# numbers=1
+# for i in range(1, factorial + 1):
+#     numbers*=i
+# print(numbers)
+
+
+
+# numbers=1
+# x = int(input("введите число"))
+# x = [int(i) for i in str(x)]
+# numbers*=x
+# print(numbers)
+
+# numbers = 1
+# x = int(input("введите число"))
+# x = [int(i) for i in str(x)]
+# for element in x:
+#         numbers *= element
+#         print(numbers)
+
+        # my_list = [1, 2, 3, 4, 5]
+        # numbers = 1
+        # for element in my_list:
+        #     numbers *= element
+        #     print(numbers)
+
+# numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+# sorted_numbers = sorted(numbers, reverse=True)
+# print(sorted_numbers)
+
+
+
+
+
+# x = int(input("введите число в последовательности фибоначии")) #ввод числа фибоначи
+#
+# def fibonacci(n): #функция
+#     if n in (1, 2): #условие
+#         return 1 #возрощает цисло
+#     return fibonacci(n - 1) + fibonacci(n - 2) #возрощает число фибоначи
+#
+# print(fibonacci(x)) #вывод
+
+# spisok = [5, 10, 324, 24, 453, 2345, 124]
+# number = int(input("Введите "))
+# filtr = []
+# for hz in spisok:
+#     if hz > number:
+#         filtr.append(hz)
+# print(filtr)
+
+
+
+# import pygame
+# import numpy as np
+#
+# # Инициализация Pygame
+# pygame.init()
+#
+# # Создание окна Pygame
+# screen = pygame.display.set_mode((800, 600))
+# pygame.display.set_caption('Матрица')
+#
+# # Создание шрифта для отображения текста
+# font = pygame.font.Font(None, 30)
+#
+# def create_spiral_matrix(n):
+#     matrix = np.zeros((n, n), dtype=int)
+#     num = 1
+#     direction = [(0, -1), (1, 0), (0, 1), (-1, 0)]  # Up, Right, Down, Left
+#     row, col, d = 0, n-1, 0
+#     while num <= n*n:
+#         matrix[row][col] = num
+#         num += 1
+#         r, c = row + direction[d][0], col + direction[d][1]
+#         if r >= 0 and r < n and c >= 0 and c < n and matrix[r][c] == 0:
+#             row, col = r, c
+#         else:
+#             d = (d + 1) % 4
+#             row, col = row + direction[d][0], col + direction[d][1]
+#     return matrix
+#
+# n = 6  # Размер матрицы
+# matrix = create_spiral_matrix(n)
+#
+# # Создание списка цветов
+# colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 0), (255, 0, 255), (0, 255, 255)]
+#
+# # Вычисление позиции для центрирования матрицы
+# start_x = (800 - n * 30) // 2
+# start_y = (600 - n * 30) // 2
+#
+# # Главный цикл игры
+# running = True
+# color_index = 0
+# while running:
+#     # Обработка событий
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#
+#     # Отображение матрицы
+#     screen.fill((0, 0, 0))  # Заполнение экрана черным цветом
+#     for y, row in enumerate(matrix):
+#         for x, num in enumerate(row):
+#             color = colors[(num + color_index) % len(colors)]
+#             text = font.render(str(num), True, color)
+#             screen.blit(text, (start_x + x * 30, start_y + y * 30))
+#
+#     # Обновление экрана
+#     pygame.display.flip()
+#     pygame.time.wait(1000)  # Ждем 1 секунду перед следующим обновлением
+#     color_index = (color_index + 1) % len(colors)
+#
+# pygame.quit()
+
+
+
+
+# matrich=int(input("введите какую матрицу вы хотите 1-класик 2-спиральная"))
+# # Пример создания матрицы 3x3 без использования функций
+# # if matrich==1:
+# #
+# N, M = map(int, input().split())
+# a = [[0]*M for _ in range(N)]
+# b = [[0]*2 for _ in range(N)]
+#
+# maxi = -9999
+# mini = 9999
+# counter = 0
+#
+# for i in range(N):
+#     for j in range(M):
+#         a[i][j] = int(input())
+#         if a[i][j] > maxi:
+#             maxi = a[i][j]
+#             b[i][counter] = maxi
+#         if a[i][j] < mini:
+#             mini = a[i][j]
+#             b[i][counter + 1] = mini
+#
+# for i in range(N):
+#     for j in range(2):
+#         print(b[i][j], end=' ')
+#     print()
+# else:
+#     import numpy as np
+#
+#
+#     def create_spiral_matrix(n):
+#         matrix = np.zeros((n, n), dtype=int)
+#         num = 1
+#         direction = [(0, -1), (1, 0), (0, 1), (-1, 0)]  # Up, Right, Down, Left
+#         row, col, d = 0, n - 1, 0
+#         while num <= n * n:
+#             matrix[row][col] = num
+#             num += 1
+#             r, c = row + direction[d][0], col + direction[d][1]
+#             if r >= 0 and r < n and c >= 0 and c < n and matrix[r][c] == 0:
+#                 row, col = r, c
+#             else:
+#                 d = (d + 1) % 4
+#                 row, col = row + direction[d][0], col + direction[d][1]
+#         return matrix
+#
+#
+#     n = int(input("введите размер матрицы"))  # Размер матрицы
+#     matrix = create_spiral_matrix(n)
+#
+#     # Вывод матрицы без скобок
+#     for row in matrix:
+#         print(' '.join(map(str, row)))
+
+
+# matrix = [
+#     [1, 2, 3, 4],
+#     [5, 6, 7, 8],
+#     [9, 10, 11, 12],
+#     [13, 14, 15, 15]
+# ]
+#
+# for row in matrix:
+#     min_num = min(row)
+#     max_num = max(row)
+#     print(f"{row},{min_num},{max_num}")
+
+
+# amount_to_withdraw = int(input("введите число"))
+# kupiri = [100, 50, 20, 10, 5, 2, 1]
+# result = {}
+#
+# for kupiri in kupiri:
+#     count = amount_to_withdraw // kupiri
+#     if count > 0:
+#         result[kupiri] = count
+#         amount_to_withdraw -= count * kupiri
+#
+# print(amount_to_withdraw)
+# for kupiri, count in result.items():
+#     print(count, "по ",kupiri)
+
+
+
+
+
+# from termcolor import colored
+#
+# def add_numbers(a, b):
+#     c = a + b  # Исправлено на сложение
+#     return c
+#
+# def Subtraction(a, b):
+#     c = a - b  # Исправлено на вычитание
+#     return c
+#
+# def division(a, b):
+#     if b==0:
+#         print(colored('Error', 'red'))  # Добавлен вывод ошибки красным цветом
+#         return  # Добавлен возврат из функции при делении на ноль
+#     c = a / b
+#     return c
+#
+# def multiplication(a, b):
+#     c = a * b
+#     return c
+#
+# def menu():
+#     number1=int(input("введите первое значения"))
+#     number2=int(input("введити второе значение"))
+#     imput=int(input("введите какую функцию вы хотите использовать 1-отнимание 2-добавление 3-деление 4-умножение"))
+#     if imput<=0 or imput >= 5:  # Объединены условия для вывода ошибки
+#         print(colored('Error', 'red'))
+#     elif imput==1:
+#         print(add_numbers(number1, number2))
+#     elif imput==2:
+#         print(Subtraction(number1, number2))
+#     elif imput==3:
+#         print(division(number1, number2))
+#     elif imput==4:
+#         print(multiplication(number1, number2))
+#
+# menu()
+
+# def is_even():
+#     number = int(input("Введите число: "))
+#     return number % 2 == 0
+#
+# print(is_even())
+
+
+
+# def calculate_average(numbers):
+#     # Функція для обчислення середнього значення списку чисел
+#     if not numbers:
+#         return 0
+#     return sum(numbers) / len(numbers)
+#
+# def is_even(number):
+#     # Функція для перевірки, чи є число парним
+#     return number % 2 == 0
+#
+# def count_vowels(s):
+#     # Функція для підрахунку кількості голосних в рядку
+#     vowels = "aeiouAEIOU"
+#     return sum(1 for char in s if char in vowels)
+#
+#
+# def reverse_string(s):
+#     # Функція для зворотного виведення рядка
+#     return s[::-1]
+#
+# def celsius_to_fahrenheit(celsius):
+#     # Функція для перетворення температури з градусів Цельсія в градуси Фаренгейта
+#     return (celsius * 9 / 5) + 32
+#
+# def menu():
+#     # Функція для вибору користувачем однієї з вищезазначених функцій для виконання
+#     choice = int(input("Введите номер функции, которую хотите использовать:\n1. Среднее значение чисел\n2. Проверка на четность\n3. Количество гласных в строке\n4. Обратная строка\n5. Преобразование температуры из Цельсия в Фаренгейт\n"))
+#
+#     if choice < 1 or choice > 5:
+#         print('Ошибка: Введите число от 1 до 5')
+#     else:
+#         if choice == 1:
+#             numbers = [float(x) for x in input("Введите числа через пробел: ").split()]
+#             print(calculate_average(numbers))
+#         elif choice == 2:
+#             number = int(input("Введите число: "))
+#             print(is_even(number))
+#         elif choice == 3:
+#             string = input("Введите строку: ")
+#             print(count_vowels(string))
+#         elif choice == 4:
+#             string = input("Введите строку: ")
+#             print(reverse_string(string))
+#         elif choice == 5:
+#             celsius = float(input("Введите температуру в Цельсиях: "))
+#             print(celsius_to_fahrenheit(celsius))
+# menu()
+
+
+
+
+
+# def duplicate(s):
+#     return s * 2
+#
+# def is_even(number):
+#     return number % 2 == 0
+#
+# def calculate_average(numbers):
+#     return sum(numbers) / len(numbers)
+#
+# def fibo(n):
+#     if n <= 0:
+#         return 0
+#     elif n == 1:
+#         return 1
+#     else:
+#         return fibo(n - 1) + fibo(n - 2)
+#
+# def average(n):
+#     return sum(n) / len(n)
+#
+# def squares(n):
+#     for i in range(1, n + 1):
+#         yield i ** 2
+#
+# def gcd(a, b):
+#     while b:
+#         a, b = b, a % b
+#     return a
+#
+# def find_repetitions(numbers, x):
+#     return numbers.count(x)
+#
+# def highlight_repetitions(numbers, x):
+#     return ['*' + str(num) + '*' if num == x else str(num) for num in numbers]
+#
+# def menu():
+#     choice = int(input("Введите номер функции, которую хотите использовать:\n1. Вывод дублированного значения\n2. Проверка на четность и нечетность\n3. Подсчет суммы списка\n4. Функция на вычисление числа Фибоначчи\n5. Функция для вычисления среднего арифметического\n6. Функция-генератор\n7. Функция для подсчета НСД\n8. Поиск повторений числа в списке\n9. Выделение повторений числа в списке"))
+#     if choice == 1:
+#         s = int(input("Введите число: "))
+#         print(duplicate(s))
+#     elif choice == 2:
+#         number = int(input("Введите число для проверки на четность: "))
+#         print(is_even(number))
+#     elif choice == 3:
+#         numbers = [float(x) for x in input("Введите числа через пробел: ").split()]
+#         print(calculate_average(numbers))
+#     elif choice == 4:
+#         n = int(input("Введите число: "))
+#         print(fibo(n))
+#     elif choice == 5:
+#         n = [float(x) for x in input("Введите числа через пробел: ").split()]
+#         print(average(n))
+#     elif choice == 6:
+#         n = int(input("Введите число: "))
+#         for i in squares(n):
+#             print(i)
+#     elif choice == 7:
+#         a = int(input("Введите первое число: "))
+#         b = int(input("Введите второе число: "))
+#         res = gcd(a, b)
+#         print(res)
+#     elif choice == 8:
+#         numbers = [int(x) for x in input("Введите числа через пробел: ").split()]
+#         x = int(input("Введите число, которое нужно найти: "))
+#         repetitions = find_repetitions(numbers, x)
+#         print(f"Найдено {repetitions} повторения")
+#     elif choice == 9:
+#         numbers = [int(x) for x in input("Введите числа через пробел: ").split()]
+#         x = int(input("Введите число, которое нужно выделить: "))
+#         highlighted_numbers = highlight_repetitions(numbers, x)
+#         print(' '.join(highlighted_numbers))
+#
+# menu()
+#
+
+
+
+
+
+
+# fruit_dictionary = {
+#     'яблуко': 'червоний',
+#     'банан': 'жовтий',
+#     'груша': 'зелений',
+#     'апельсин': 'оранжевий'
+# }
+# fruit_name = input("Введіть назву фрукта: ")
+# if fruit_name not in fruit_dictionary:
+#     print(f"Фрукт з назвою '{fruit_name}' не знайдено у словнику.")
+#     exit()
+# new_color = input(f"Введіть новий колір для фрукта '{fruit_name}': ")
+# fruit_dictionary[fruit_name] = new_color
+# print("Оновлений словник фруктів:")
+# for fruit, color in fruit_dictionary.items():
+#     print(f"{fruit}: {color}")
+
+
+
+# fruit_colors = {
+#     'яблуко': 'червоний',
+#     'банан': 'жовтий',
+#     'груша': 'зелений',
+#     'апельсин': 'оранжевий',
+# }
+#
+# # Задання 11: Перевірте, чи словник порожній
+# perevirka = input("Чи хочете перевірити, чи словник порожній? (Так/Ні): ")
+# if perevirka.lower() == "так":
+#     if not fruit_colors:
+#         print("Словник порожній.")
+#     else:
+#         print("Словник не порожній.")
+#
+# # Задання 12: Пошук фруктів за кольором
+# kolir_poisk = input("Введіть колір для пошуку фруктів: ")
+# found_fruits = [key for key, value in fruit_colors.items() if value == kolir_poisk]
+# if found_fruits:
+#     print(f"Фрукти з колором {kolir_poisk}: {', '.join(found_fruits)}")
+# else:
+#     print(f"Фруктів з колором {kolir_poisk} не знайдено.")
+#
+# # Задання 13: Змініть колір існуючого фрукта
+# zmіna_koliru_nazva = input("Введіть назву фрукта, колір якого ви хочете змінити: ")
+# if zmіna_koliru_nazva in fruit_colors:
+#     new_kolir = input("Введіть новий колір для фрукта: ")
+#     fruit_colors[zmіna_koliru_nazva] = new_kolir
+#     print(f"Колір фрукта {zmіna_koliru_nazva} змінено на {new_kolir}")
+# else:
+#     print(f"Фрукта {zmіna_koliru_nazva} немає у словнику.")
+#
+# # Задання 14: Виведіть назви всіх фруктів
+# print("Назви всіх фруктів у словнику:")
+# for fruit_name in fruit_colors.keys():
+#     print(fruit_name)
+#
+# # Задання 15: Об'єднання двох словників фруктів
+# second_fruit_colors = {}
+# kilkist_fruktiv = int(input("Введіть кількість фруктів для додавання в другий словник: "))
+# for _ in range(kilkist_fruktiv):
+#     nazva_fruktu = input("Введіть назву фрукта: ")
+#     kolir_fruktu = input("Введіть колір фрукта: ")
+#     second_fruit_colors[nazva_fruktu] = kolir_fruktu
+#
+# # Об'єднання двох словників
+# fruit_colors.update(second_fruit_colors)
+#
+# # Виведення об'єднаного словника
+# print("Об'єднаний словник фруктів:")
+# for key, value in fruit_colors.items():
+#     print(f"{key}: {value}")
+
+
+# fruit_colors = {
+#     'яблуко': 'червоний',
+#     'банан': 'жовтий',
+#     'груша': 'зелений',
+#     'апельсин': 'оранжевий',
+# }
+#
+# if not fruit_colors:
+#     print("Список пуст")
+# else:
+#     print("Список не пуст")
+# kolir_poisk = input("Введіть колір для пошуку фруктів: ")
+# found_fruits = [key for key, value in fruit_colors.items() if value == kolir_poisk]
+# if found_fruits:
+#     print(f"Фрукти з колором {kolir_poisk}: {', '.join(found_fruits)}")
+# else:
+#     print(f"Фруктів з колором {kolir_poisk} не знайдено.")
+# kolir=input("введите колір")
+# if kolir in fruit_colors.values():
+#     print("Цвет",kolir,"найден в словаре.")
+# else:
+#     print("Цвет",kolir,"не найден в словаре.")
+# znachenei=input("введите какой вы цвет хотите поменять")
+# fruit_colors['червоний'] = znachenei
+# for key in fruit_colors.keys():
+#     print(key)
+
+
+#
+# nums = [10, 23, 65, 43, 13]
+# doubled_nums = list(map(lambda x: x * 9/5+32, nums))
+# print(doubled_nums)  # Виведе [2, 4, 6, 8, 10]
+
+
+# nums = [6, 32, 25,2, 8]
+# even_nums = list(filter(lambda x: x > 10, nums))
+# print(even_nums)
+
+
+# footballers_goals = {'Eusebio': 120, 'Cruyff': 104, 'Pele': 150, 'Ronaldo': 132, 'Messi': 125}
+# sorted_footballers_by_goals = sorted(footballers_goals.items(), key=lambda x:x[1], reverse=True)
+# converted_dict = dict(sorted_footballers_by_goals)
+# print(converted_dict)
+
+
+
+# class Employee:
+#     def __init__(self, name, age):
+#         self.name = age
+#         self.age = name
+# Alex = Employee('Alex', 20)
+# Amanda = Employee('Amanda', 30)
+# David = Employee('David', 15)
+# L = [Alex, Amanda, David]
+# L.sort(key=lambda x: x.name)
+# print([item.name for item in L])
+
+
+# import math
+# distance = lambda p1, p2: math.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
+# point1 = (2, 3)
+# point2 = (5, 7)
+# print(distance(point1, point2))
+
+
+
+# a = 1
+# b = 2
+# c = 3
+# x_values = range(-10, 11)
+# quadratic = lambda x: a*x**2 + b*x + c
+# for x in x_values:
+#     print(f'x={x}, y={quadratic(x)}')
+
+# import numpy as np
+# import matplotlib.pyplot as plt
+# from matplotlib.colors import ListedColormap
+# import ipywidgets as widgets
+# from IPython.display import display, clear_output
+#
+# # Инициализация начального состояния игрового поля
+# def initialize_grid(size):
+#     return np.random.choice([0, 1], size=size*size, p=[0.5, 0.5]).reshape(size, size)
+#
+# # Обновление игрового поля
+# def update_grid(grid):
+#     new_grid = grid.copy()
+#     rows, cols = grid.shape
+#     for row in range(rows):
+#         for col in range(cols):
+#             alive_neighbors = np.sum(grid[row-1:row+2, col-1:col+2]) - grid[row, col]
+#             if grid[row, col] == 1 and (alive_neighbors < 2 or alive_neighbors > 3):
+#                 new_grid[row, col] = 0
+#             elif grid[row, col] == 0 and alive_neighbors == 3:
+#                 new_grid[row, col] = 1
+#     return new_grid
+#
+# # Визуализация игрового поля
+# def plot_grid(grid):
+#     cmap = ListedColormap(['red', 'green'])
+#     plt.figure(figsize=(5, 5))
+#     plt.imshow(grid, cmap=cmap)
+#     plt.axis('off')
+#     plt.show()
+#
+# # Создание виджетов для интерактивного обновления
+# button = widgets.Button(description="Следующий шаг")
+# output = widgets.Output()
+#
+# def on_button_clicked(b):
+#     global grid
+#     grid=update_grid(grid)
+#     with output:
+#         clear_output(wait=True)
+#         plot_grid(grid)
+#
+# button.on_click(on_button_clicked)
+#
+# # Инициализация и отображение
+# grid = initialize_grid(9)  # Вы можете изменить размер сетки здесь
+# display(button, output)
+# with output:
+#     plot_grid(grid)
+
+
+
+
+
+# colvo = int(input("Введите сколько всего людей: "))
+# ubitei = int(input("Введите какого по счету будет убивать? "))
+# my_list = [i for i in range(1, colvo + 1)]
+# index_to_remove = 0
+# while len(my_list) > 1:
+#     index_to_remove = (index_to_remove + ubitei - 1) % len(my_list)
+#     print(f"Удаляем {my_list[index_to_remove]}")
+#     my_list.pop(index_to_remove)
+# print(f"Оставшийся элемент: {my_list}")
+
+
+
+
+# from flask import Flask
+#
+# app = Flask(__name__)
+#
+# @app.route('/')
+# def hello_world():
+#     return 'Hello, World!'
+#
+# if __name__ == '__main__':
+#     app.run(debug=True)
+
+
+
+
+
+
+
+# import random
+# my_list = [[2,5,4,6,2],
+#            [4,5,6,3,6],
+#            [4,6,2,6,7],
+#            [7,2347,23,5,5]]
+# for i in range(4):
+#     min_value = min(my_list[0+1])
+# print("Минимальное значение в списке:", min_value)
+
+
+
+# import random
+#
+# # Получаем от пользователя количество строк, столбцов и диапазон случайных чисел
+# rows = int(input("Введите количество строк: "))
+# cols = int(input("Введите количество столбцов: "))
+# start = int(input("Введите начало диапазона случайных чисел: "))
+# end = int(input("Введите конец диапазона случайных чисел: "))
+#
+# matrix = [[random.randint(start, end) for _ in range(cols)] for _ in range(rows)]
+# print("\nСлучайная матрица:")
+# for row in matrix:
+#     print(row)
+#
+# for col_index in range(cols):
+#     column_values = [row[col_index] for row in matrix]
+#     max_value = max(column_values)
+#     print(f"\nМаксимальное значение в столбце {col_index + 1}: {max_value}")
+#     print(column_values)
+#
+# # Добавленный код для нахождения максимального значения во всей матрице
+# max_value_in_matrix = max(max(row) for row in matrix)
+# print(f"\nСамое большое число во всей матрице: {max_value_in_matrix}")
+
+
+
+# import socket
+#
+# host = '127.0.0.1'  # Локальный адрес
+# port = 12345        # Произвольный порт для подключения
+#
+# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+#     s.bind((host, port))
+#     s.listen()
+#     conn, addr = s.accept()
+#     with conn:
+#         print('Соединение установлено:', addr)
+#         while True:
+#             data = conn.recv(1024)
+#             if not data:
+#                 break
+#             print("Получено:", data.decode())
+#             msg = input("Сообщение: ")
+#             conn.sendall(msg.encode())
+
+
+
+import pygame
+import sys
+
+# Определения констант
+BOARD_SIZE = 8
+SQUARE_SIZE = 50
+BOARD_COLOR_1 = (255, 206, 158)
+BOARD_COLOR_2 = (209, 139, 71)
+PIECE_COLOR_1 = (80, 80, 80)  # Цвет шашек первого игрока
+PIECE_COLOR_2 = (240, 240, 240)  # Цвет шашек второго игрока
+HIGHLIGHT_COLOR = (0, 0, 255)  # Цвет подсветки выбранной шашки
+WINDOW_SIZE = (BOARD_SIZE * SQUARE_SIZE, BOARD_SIZE * SQUARE_SIZE)
+
+# Инициализация Pygame
+pygame.init()
+screen = pygame.display.set_mode(WINDOW_SIZE)
+pygame.display.set_caption('Игра в шашки')
+
+# Вспомогательные переменные
+selected_piece = None  # Текущая выбранная шашка
+moving_piece = False  # Перемещается ли в данный момент выбранная шашка
+pieces = []  # Список всех шашек в формате (row, col, color)
+
+# Определение начального расположения шашек
+for row in range(3):
+    for col in range((row + 1) % 2, BOARD_SIZE, 2):
+        pieces.append((row, col, PIECE_COLOR_1))
+for row in range(5, 8):
+    for col in range((row + 1) % 2, BOARD_SIZE, 2):
+        pieces.append((row, col, PIECE_COLOR_2))
+
+def draw_board():
+    screen.fill(BOARD_COLOR_1)
+    for row in range(BOARD_SIZE):
+        for col in range(row % 2, BOARD_SIZE, 2):
+            square = (col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE)
+            pygame.draw.rect(screen, BOARD_COLOR_2, square)
+
+def draw_pieces():
+    for piece in pieces:
+        row, col, color = piece
+        position = (col * SQUARE_SIZE + SQUARE_SIZE // 2, row * SQUARE_SIZE + SQUARE_SIZE // 2)
+        pygame.draw.circle(screen, color, position, SQUARE_SIZE // 2 - 5)
+        if selected_piece and piece == selected_piece:
+            pygame.draw.circle(screen, HIGHLIGHT_COLOR, position, SQUARE_SIZE // 2 - 3, 1)
+
+def select_piece(pos):
+    global selected_piece, moving_piece
+    x, y = pos
+    col, row = x // SQUARE_SIZE, y // SQUARE_SIZE
+    for piece in pieces:
+        if piece[:2] == (row, col):
+            if selected_piece == piece:
+                selected_piece = None
+                moving_piece = False
+            else:
+                selected_piece = piece
+                moving_piece = True
+            return
+    selected_piece = None
+    moving_piece = False
+
+def move_piece(pos):
+    global selected_piece, moving_piece
+    if moving_piece and selected_piece:
+        x, y = pos
+        col, row = x // SQUARE_SIZE, y // SQUARE_SIZE
+        # Проверка, что движение происходит по горизонтали в пределах доски
+        if row == selected_piece[0] and 0 <= col < BOARD_SIZE:
+            pieces.remove(selected_piece)
+            selected_piece = (row, col, selected_piece[2])
+            pieces.append(selected_piece)
+            moving_piece = False  # Завершаем перемещение
+
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:  # Левая кнопка мыши
+                select_piece(event.pos)
+        elif event.type == pygame.MOUSEBUTTONUP:
+            if event.button == 1 and moving_piece:  # Левая кнопка мыши и шашка выбрана для перемещения
+                move_piece(event.pos)
+
+    draw_board()
+    draw_pieces()
+    pygame.display.flip()
+
