@@ -1,0 +1,116 @@
+import pygame
+import sys
+import os
+from multiprocessing import Process
+
+# Инициализация Pygame
+pygame.init()
+
+# Увеличиваем размеры окна в 2.3 раза
+original_width, original_height = 474, 355
+width, height = int(original_width * 2.3), int(original_height * 2.3)
+screen = pygame.display.set_mode((width, height))
+
+# Загружаем изображение лабиринта и масштабируем его
+background_image = pygame.image.load('C:\\Users\\sanyo\\PycharmProjects\\pythonProject1\\image\\labirint.jpeg')
+background_image = pygame.transform.scale(background_image, (width, height))
+
+# Загружаем изображения для анимации спрайта
+sprites = [
+    pygame.image.load('C:\\Users\\sanyo\\PycharmProjects\\pythonProject1\\image\\image1.png').convert_alpha(),
+    pygame.image.load('C:\\Users\\sanyo\\PycharmProjects\\pythonProject1\\image\\image2.png').convert_alpha()
+]
+sprites = [pygame.transform.scale(sprite, (55, 55)) for sprite in sprites]
+
+# Текущие параметры спрайта
+current_frame = 0
+current_direction = 0  # Угол в градусах
+
+# Позиция спрайта
+sprite_x, sprite_y = 400, 159
+
+# Функция проверки свободного пространства
+def is_free(x, y, width, height, background, wall_color, tolerance=10):
+    for dx in range(width):
+        for dy in range(height):
+            if x + dx >= background.get_width() or y + dy >= background.get_height():
+                return False
+            color = background.get_at((x + dx, y + dy))
+            if all(abs(color[i] - wall_color[i]) <= tolerance for i in range(3)):
+                return False
+    return True
+
+# Функция для обновления спрайта и его направления
+def update_sprite(angle):
+    global current_frame, current_direction
+    current_direction = angle
+    current_frame = (current_frame + 1) % 2  # Переключение между двумя спрайтами для анимации
+
+# Цвет стен лабиринта
+wall_color_rgb = (29, 0, 0, 255)  # Красный цвет в качестве примера
+
+# Загружаем изображение чекпоинта и масштабируем его
+check_point_image = pygame.image.load('C:\\Users\\sanyo\\PycharmProjects\\pythonProject1\\image\\check_point.png').convert_alpha()
+check_point_image = pygame.transform.scale(check_point_image, (55, 55))  # Размер можно настроить
+
+# Рассчитываем центр экрана
+center_x, center_y = 420, 259
+
+# Обновляем позицию, чтобы убедиться, что изображение располагается по центру
+check_point_x = center_x - check_point_image.get_width() // 2
+check_point_y = center_y - check_point_image.get_height() // 2
+
+# Создаем прямоугольники для обнаружения столкновений
+sprite_rect = pygame.Rect(sprite_x, sprite_y, 55, 55)
+check_point_rect = pygame.Rect(check_point_x, check_point_y, check_point_image.get_width(), check_point_image.get_height())
+
+def open_new_window():
+    # Запускаем новый процесс Python с новым окном Pygame
+    script_path = os.path.join(sys.path[0], 'new_window.py')  # Путь к скрипту нового окна
+    p = Process(target=lambda: os.system(f"python \"{script_path}\""))
+    p.start()
+
+# Основной цикл программы
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.KEYDOWN:
+            move_x, move_y = 0, 0
+            if event.key == pygame.K_LEFT:
+                move_x = -11
+                update_sprite(180)  # Поворот налево
+            elif event.key == pygame.K_RIGHT:
+                move_x = 11
+                update_sprite(0)  # Исходное положение
+            elif event.key == pygame.K_UP:
+                move_y = -11
+                update_sprite(90)  # Поворот вверх
+            elif event.key == pygame.K_DOWN:
+                move_y = 11
+                update_sprite(-90)  # Поворот вниз
+
+            if is_free(sprite_x + move_x, sprite_y + move_y, 55, 55, background_image, wall_color_rgb):
+                sprite_x += move_x
+                sprite_y += move_y
+
+                # Обновляем прямоугольник спрайта для новой позиции
+                sprite_rect.x = sprite_x
+                sprite_rect.y = sprite_y
+
+                # Проверяем столкновение с чекпоинтом
+                if sprite_rect.colliderect(check_point_rect):
+                    p = Process(target=open_new_window)
+                    p.start()
+
+    # Отображаем изображения в правильном порядке
+    screen.blit(background_image, (0, 0))  # Сначала фон
+    screen.blit(check_point_image, (check_point_x, check_point_y))  # Затем чекпоинт
+    rotated_sprite = pygame.transform.rotate(sprites[current_frame], current_direction)
+    screen.blit(rotated_sprite, (sprite_x, sprite_y))  # И последним спрайт
+
+    # Обновляем дисплей
+    pygame.display.flip()
