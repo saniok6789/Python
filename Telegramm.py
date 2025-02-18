@@ -3,7 +3,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKe
 from telegram.ext import Application, ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
 # Токен бота
-TOKEN = '6550425386:AAG_m9QuTmE1PR_a7wLdxXjxg7Sfh_wtoqA'
+TOKEN = 'Token'
 ADMIN_ID = 1763797493
 
 # Цены
