@@ -24,20 +24,24 @@ TOKEN = '6550425386:AAG_m9QuTmE1PR_a7wLdxXjxg7Sfh_wtoqA'
 # ID администратора (НЕ МЕНЯТЬ)
 ADMIN_ID = 1763797493
 
-# "Тестовый" provider_token для оплаты (замените при необходимости на рабочий)
-PAYMENT_PROVIDER_TOKEN = "TEST:XXXXXXXXXXXXXX"
+# "Тестовый" provider_token для оплаты звездами (замените при необходимости на реальный)
+PAYMENT_PROVIDER_TOKEN = "TEST:XXXXXXXXXXXXXXXX"
 
-# Базовая цена (гривны)
-BASE_PRICE = 250
+# Допустим, у нас есть базовая цена в гривнах (для информативного сообщения)
+BASE_PRICE_UAH = 250
 
-# Промокоды
+# Допустим, базовое количество "звёзд" за этот товар = 500
+BASE_STARS = 500
+
+# Промокоды и скидки
 PROMO_CODES = {
-    'test1': 0.10,
-    'test2': 0.15,
-    'test3': 0.20
+    'test1': 0.10,  # 10%
+    'test2': 0.15,  # 15%
+    'test3': 0.20   # 20%
 }
 
 # Ссылки для оплаты через iPay
+# (для каждого промокода - своя ссылка c учётом скидки).
 PAYMENT_LINKS = {
     'default': 'https://www.ipay.ua/ru/constructor/pz6lelpv',
     'test1': 'https://www.ipay.ua/ru/constructor/1ygfunlz',
@@ -47,6 +51,26 @@ PAYMENT_LINKS = {
 
 # Храним данные о пользователях и заказах
 user_data = {}
+
+def get_ipay_link(promo_code: str = None) -> str:
+    """
+    Возвращает ссылку iPay, зависящую от промокода.
+    Если промокода нет или он невалиден, возвращаем default.
+    """
+    if promo_code in PAYMENT_LINKS:
+        return PAYMENT_LINKS[promo_code]
+    return PAYMENT_LINKS['default']
+
+
+def calculate_discounted_stars(discount: float) -> int:
+    """
+    Считает, сколько звезд надо заплатить с учётом скидки.
+    Возвращает целое количество звёзд (округляется вниз).
+    """
+    # Например, BASE_STARS = 500, скидка = 0.1 => 450 звёзд
+    stars = BASE_STARS * (1 - discount)
+    return int(stars)  # округляем до целого
+
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
@@ -90,18 +114,23 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = query.from_user
     user_id = user.id
 
+    # Если пользователь раньше не выбирал товар, и вдруг нажал кнопку...
+    if user_id not in user_data:
+        user_data[user_id] = {}
+
     # --- Пользователь выбирает один из видов меда ---
     if query.data in ['order_honey', 'order_honey2', 'order_honey3']:
-        # Сохраняем, какой мед выбрал пользователь
+        # Сохраняем, какой мед выбрал пользователь (для информации)
         user_choice_text = {
-            'order_honey': 'Вы выбрали заказать мед фацельевый.',
-            'order_honey2': 'Вы выбрали заказать мед майский.',
-            'order_honey3': 'Вы выбрали заказать мед Подсолнечный.'
+            'order_honey': 'Вы выбрали заказать мед фацельевый',
+            'order_honey2': 'Вы выбрали заказать мед майский',
+            'order_honey3': 'Вы выбрали заказать мед Подсолнечный'
         }.get(query.data, 'Неправильный выбор.')
 
         user_data[user_id] = {
             'choice': user_choice_text,
-            'step': 'chose_honey'  # Пользователь выбрал мед, ждем способ оплаты
+            'step': 'chose_honey',  # Пользователь выбрал мед, ждем способ оплаты
+            'discount': 0.0         # По умолчанию скидки нет
         }
 
         # Предлагаем варианты оплаты
@@ -115,24 +144,25 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             ]
         ]
         await query.message.reply_text(
-            text=f"{user_choice_text}\nВыберите способ оплаты:",
+            text=f"{user_choice_text}\nЦена без скидки: {BASE_PRICE_UAH} грн (или {BASE_STARS} ⭐️)\n\nВыберите способ оплаты:",
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
         return
 
-    # --- Пользователь решил оплатить звездами ---
+    # --- Пользователь хочет оплатить звездами (без промокода) ---
     elif query.data == 'pay_with_stars':
-        # Сохраняем, что далее идёт процесс оплаты звездами
+        # Если промокода нет, discount=0
+        discount = user_data[user_id].get('discount', 0.0)
+        discounted_stars = calculate_discounted_stars(discount)
+
         user_data[user_id]['step'] = 'awaiting_star_payment'
 
-        # Отправляем invoice (пример на 1 звезду = 100 «внутренних единиц»)
-        # В реальном боте тут должен быть реальный provider_token и валюта "UAH"/"USD"/и т.д.
-        # Но для демонстрации предполагаем "XTR" (условная "звездная" валюта).
         title = "Оплата звездами"
-        description = "Оплата за мед (пример)."
-        payload = "star_payment_payload"  # Произвольная строка, которая вернется в PreCheckoutQuery
-        currency = "XTR"  # Фиктивная "валюта"
-        prices = [LabeledPrice("1 ⭐️", 500)]  # 100 единиц = 1 звезда (пример)
+        description = f"Оплата за мёд. Скидка: {int(discount*1)}%"
+        payload = "star_payment_payload"
+        currency = "XTR"  # Условная "звёздная" валюта
+        # discounted_stars * 100 => перевод звезд в «суб-единицы»
+        prices = [LabeledPrice("⭐️", discounted_stars * 1)]
 
         await context.bot.send_invoice(
             chat_id=user_id,
@@ -143,7 +173,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             prices=prices,
             payload=payload
         )
-        # Пользователю отобразится кнопка "Pay"
         return
 
     # --- Пользователь хочет ввести промокод ---
@@ -154,14 +183,35 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     # --- Пользователь хочет оплатить товар по ссылке (iPay) ---
     elif query.data == 'pay_with_card':
-        # Считаем, что без промокода = полная цена
-        # Если промокод был введён ранее (в теории), можно учитывать user_data[user_id].get('discount')
-        # Но в данном упрощенном коде мы считаем, что промокод не вводился.
+        # Допустим, если промокод не введён, открываем default ссылку.
+        discount = user_data[user_id].get('discount', 0.0)
+        if discount and discount > 0:
+            # Если вдруг скидка есть, значит ранее уже ввели промокод
+            # и в user_data[user_id]['promo_code'] лежит код
+            promo_code = user_data[user_id].get('promo_code', None)
+            link = get_ipay_link(promo_code)
+        else:
+            # Если нет скидки, берём ссылку default
+            link = get_ipay_link(None)
+
+        # Отправим кнопку с url. Нажатие «перебросит» на сайт.
+        keyboard = [[InlineKeyboardButton("Перейти на сайт iPay", url=link)]]
         await query.message.reply_text(
-            text=f"Перейдите по ссылке для оплаты: {PAYMENT_LINKS['default']}"
+            "Для оплаты нажмите кнопку ниже:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
         )
-        # После оплаты пользователь может вернуться и сообщить об оплате, если нужно.
-        # Логика зависит от ваших бизнес-процессов.
+        return
+
+    # --- Пользователь хочет оплатить через iPay по скидке (если так решили делать доп. кнопку) ---
+    elif query.data == 'pay_ipay_discount':
+        # Сюда мы попадаем, если пользователь ввел промокод и выбрал оплату iPay со скидкой
+        promo_code = user_data[user_id].get('promo_code', None)
+        link = get_ipay_link(promo_code)  # берем конкретную ссылку под промокод
+        keyboard = [[InlineKeyboardButton("Оплатить iPay (со скидкой)", url=link)]]
+        await query.message.reply_text(
+            "Нажмите, чтобы оплатить iPay со скидкой:",
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
         return
 
     # --- Обработка обращения в техподдержку ---
@@ -180,11 +230,11 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
-    Обработка текстовых сообщений (адрес, email, промокод и т.д.)
+    Обработка текстовых сообщений (промокод, адрес, email и т.д.)
     """
     user = update.message.from_user
     user_id = user.id
-    text = update.message.text
+    text = update.message.text.strip()
 
     if user_id not in user_data:
         return  # Нет данных о пользователе, пропускаем
@@ -193,50 +243,64 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     # --- Пользователь вводит промокод ---
     if step == 'promo':
-        promo_code = text.strip()
+        promo_code = text
         if promo_code in PROMO_CODES:
             discount = PROMO_CODES[promo_code]
-            discounted_price = BASE_PRICE * (1 - discount)
+            user_data[user_id]['discount'] = discount
+            user_data[user_id]['promo_code'] = promo_code
+            user_data[user_id]['step'] = 'after_promo'
+
+            discounted_uah = BASE_PRICE_UAH * (1 - discount)
+            discounted_stars = calculate_discounted_stars(discount)
             await update.message.reply_text(
-                f"У вас скидка {discount * 100}%. Цена со скидкой: {discounted_price:.2f} грн",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("ОПЛАТИТЬ", url=PAYMENT_LINKS[promo_code])]
-                ])
+                f"Промокод принят! Скидка: {int(discount*100)}%\n\n"
+                f"Новая цена: {discounted_uah:.2f} грн или {discounted_stars} ⭐️\n\n"
+                "Выберите, как хотите оплатить:"
+            )
+            # Показываем две кнопки: оплатить звёздами по скидке, оплатить iPay по скидке
+            keyboard = [
+                [InlineKeyboardButton("Оплатить звездами (со скидкой)", callback_data='pay_with_stars')],
+                [InlineKeyboardButton("Оплатить iPay (со скидкой)", callback_data='pay_ipay_discount')]
+            ]
+            await update.message.reply_text(
+                "Выберите способ оплаты:",
+                reply_markup=InlineKeyboardMarkup(keyboard)
             )
         else:
-            await update.message.reply_text("Промокод не найден!")
-        # Сбрасываем состояние пользователя (чтобы заново не спрашивать)
-        user_data.pop(user_id, None)
+            # Промокод не найден, сбрасываем состояние
+            await update.message.reply_text("Промокод не найден! Попробуйте снова или выберите другой способ оплаты.")
+            user_data[user_id]['step'] = 'chose_honey'  # Возвращаем в состояние выбора оплаты
         return
 
-    # --- Если пользователь уже УСПЕШНО ОПЛАТИЛ звездами, просим ввести адрес ---
+    # --- Если пользователь оплатил звездами (в хендлере) и теперь просим адрес ---
     if step == 'paid_by_stars_awaiting_address':
         user_data[user_id]['address'] = text
         user_data[user_id]['step'] = 'paid_by_stars_awaiting_email'
         await update.message.reply_text("Введите ваш e-mail:")
         return
 
-    # --- Если пользователь ввёл адрес, теперь ждём e-mail ---
+    # --- Если пользователь уже ввёл адрес, теперь ждём e-mail ---
     if step == 'paid_by_stars_awaiting_email':
         user_data[user_id]['email'] = text
         user_data[user_id]['step'] = 'completed'
 
-        # Уведомляем админа, что пользователь сообщил адрес
         choice = user_data[user_id]['choice']
         address = user_data[user_id]['address']
         email = user_data[user_id]['email']
+        discount = user_data[user_id].get('discount', 0.0)
 
         # Формируем сообщение для админа
         order_info = (
-            f"Заказ ОПЛАЧЕН ЗВЕЗДАМИ!\n\n"
+            f"Заказ ОПЛАЧЕН ЗВЁЗДАМИ!\n\n"
             f"{choice}\n"
+            f"Скидка: {int(discount*100)}%\n"
             f"Адрес: {address}\n"
             f"Email: {email}\n"
             f"UserID: {user_id} (@{user.username if user.username else 'no_username'})"
         )
         await context.bot.send_message(chat_id=ADMIN_ID, text=order_info)
 
-        # Уведомляем пользователя, что заказ принят
+        # Уведомляем пользователя, что заказ оформлен
         await update.message.reply_text("Спасибо! Ваш заказ оформлен. Ожидайте доставки.")
 
         # Очищаем данные
@@ -273,7 +337,6 @@ async def contact_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 # --- Хендлер предварительной проверки платежа (Invoice) ---
 async def precheckout_handler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.pre_checkout_query
-    # Допустим, если что-то пошло не так, отвечаем ok=False
     await query.answer(ok=True)
 
 
@@ -285,15 +348,16 @@ async def successful_payment_handler(update: Update, context: ContextTypes.DEFAU
     user = update.message.from_user
     user_id = user.id
 
-    # Помечаем в user_data, что пользователь оплатил звездами
     if user_id in user_data and user_data[user_id].get('step') == 'awaiting_star_payment':
         user_data[user_id]['step'] = 'paid_by_stars_awaiting_address'
+        choice = user_data[user_id].get('choice', 'Неизвестный товар')
+        discount = user_data[user_id].get('discount', 0.0)
 
-        # Уведомляем админа, что пришла оплата звездами (без адреса, т.к. ещё не спрашивали)
-        choice = user_data[user_id]['choice']
+        # Уведомляем админа, что пришла оплата звездами (но адреса ещё нет)
         admin_text = (
             f"Пользователь оплатил ЗВЁЗДАМИ!\n\n"
             f"{choice}\n"
+            f"Скидка: {int(discount*100)}%\n"
             f"UserID: {user_id} (@{user.username if user.username else 'no_username'})\n\n"
             "Адрес и email ещё не введены."
         )
@@ -303,9 +367,8 @@ async def successful_payment_handler(update: Update, context: ContextTypes.DEFAU
         await update.message.reply_text(
             "Оплата успешно получена! Теперь укажите, пожалуйста, адрес доставки (улица, дом и т.п.):"
         )
-
     else:
-        # Если вдруг сообщение о successful_payment пришло не в нужном состоянии
+        # Если успешная оплата прилетела не в нужном состоянии
         await update.message.reply_text("Спасибо за оплату, но мы не распознали заказ. Свяжитесь с поддержкой.")
 
 
