@@ -22,7 +22,7 @@ from telegram.ext import (
 # Токен бота (НЕ МЕНЯТЬ)
 TOKEN = 'Token'
 # ID администратора (НЕ МЕНЯТЬ)
-ADMIN_ID = 1763797493
+ADMIN_ID = ID
 
 # "Тестовый" provider_token для оплаты звездами (замените при необходимости на реальный)
 PAYMENT_PROVIDER_TOKEN = "TEST:XXXXXXXXXXXXXXXX"
