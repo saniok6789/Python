@@ -20,7 +20,7 @@ from telegram.ext import (
 )
 
 # Токен бота (НЕ МЕНЯТЬ)
-TOKEN = '6550425386:AAG_m9QuTmE1PR_a7wLdxXjxg7Sfh_wtoqA'
+TOKEN = 'Token'
 # ID администратора (НЕ МЕНЯТЬ)
 ADMIN_ID = 1763797493
 
